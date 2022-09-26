@@ -1,0 +1,137 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1">
+<meta name=generator content="Hugo 0.93.0">
+<meta name=generator content="Relearn 3.4.1+tip">
+<meta name=description content>
+<title>ASP.NET MVC :: AWS Basics</title><link rel=alternate type=application/rss+xml href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/dotnet-asp/index.xml title="AWS Basics">
+<link rel=icon href=https://launchcodetechnicaltraining.org/aws-basics/images/favicon.png?1664207541 type=image/png>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/nucleus.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/fontawesome-all.min.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/featherlight.min.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/perfect-scrollbar.min.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/auto-complete.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/theme.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/theme-lc-light.css?1664207541 rel=stylesheet id=variant-style>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/variant.css?1664207541 rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/aws-basics/css/print.css?1664207541 rel=stylesheet media=print>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/variant.js?1664207541></script>
+<script>var index_url="https://launchcodetechnicaltraining.org/aws-basics/index.json",baseUriFull,root_url="https://launchcodetechnicaltraining.org/aws-basics/",baseUri=root_url.replace(/\/$/,'');window.T_Copy_to_clipboard="Copy to clipboard",window.T_Copied_to_clipboard="Copied to clipboard!",window.T_Copy_link_to_clipboard="Copy link to clipboard",window.T_Link_copied_to_clipboard="Copied link to clipboard!",baseUriFull="https://launchcodetechnicaltraining.org/aws-basics/",variants.init(["lc-light","lc-dark-blue","lc-dark-blue-two"])</script>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/jquery.min.js?1664207541></script>
+</head><body class=mobile-support data-url=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/dotnet-asp/>
+<div id=body class=default-animation>
+<div id=sidebar-overlay></div><div id=toc-overlay></div><nav id=topbar class=highlightable>
+<div>
+<div class=navigation>
+<a class="nav nav-next" href=https://launchcodetechnicaltraining.org/aws-basics/final-project/ title="Final Project"><i class="fas fa-chevron-right fa-fw"></i></a>
+</div><div class=navigation>
+<a class="nav nav-prev" href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/java-spring/ title="Java Spring MVC"><i class="fas fa-chevron-left fa-fw"></i></a>
+</div><div id=breadcrumbs>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle title=Menu><i class="fas fa-bars fa-fw"></i></a>
+</span>
+<span id=toc-menu title="Table of Contents"><i class="fas fa-list-alt fa-fw"></i></span>
+<ol class=links itemscope itemtype=http://schema.org/BreadcrumbList>
+<meta itemprop=itemListOrder content="Descending">
+<li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><meta itemprop=position content="5"><a itemprop=item href=https://launchcodetechnicaltraining.org/aws-basics/><span itemprop=name>Home</span></a> > </li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><meta itemprop=position content="4"><a itemprop=item href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/><span itemprop=name>Elastic Compute Cloud</span></a> > </li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><meta itemprop=position content="3"><a itemprop=item href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/><span itemprop=name>Walkthrough</span></a> > </li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><meta itemprop=position content="2"><a itemprop=item href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/><span itemprop=name>Reverse Proxy</span></a> > </li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><meta itemprop=position content="1"><a itemprop=item href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/dotnet-asp/ aria-disabled=true><span itemprop=name>ASP.NET MVC</span></a></li></ol></div><div class="default-animation progress">
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#reverse-proxy-for-mvc-application>Reverse Proxy for MVC Application</a>
+<ul>
+<li><a href=#machine-settings>Machine Settings</a></li><li><a href=#connecting-to-ec2-instance>Connecting to EC2 Instance</a></li><li><a href=#project-requirements>Project Requirements</a></li><li><a href=#clone-project-artifacts>Clone Project Artifacts</a></li><li><a href=#install-dotnet-sdk>Install dotnet-sdk</a></li><li><a href=#install-caddy>Install Caddy</a></li><li><a href=#configure-web-server>Configure Web Server</a></li><li><a href=#start-aspnet-application>Start ASP.NET Application</a></li><li><a href=#validation>Validation</a></li></ul></li></ul></nav></div></div></div></nav><main id=body-inner class=highlightable>
+<div class=flex-block-wrapper>
+<div id=head-tags>
+</div><article>
+<h1>ASP.NET MVC</h1><h2 id=reverse-proxy-for-mvc-application>Reverse Proxy for MVC Application</h2><p>This walkthrough will take an MVC application and proxy the <code>HTTP</code> requests to the running application server.</p><div class="box notices note">
+<div class=box-label><i class="fas fa-exclamation-circle fa-fw"></i> Note</div><div class=box-content>
+<p>The build artifacts for this walkthrough are located here:
+<code>https://github.com/LaunchCodeTechnicalTraining/dotnet-mvc-artifacts</code></p></div></div><h3 id=machine-settings>Machine Settings</h3><p>Create a new <code>EC2</code> instance with the following:</p><ol>
+<li>Name: <code>your-ec2-name</code></li><li>AMI: <code>Ubuntu 22.04 LTS</code></li><li>Instance Type: <code>t2-micro (free tier)</code></li><li>Key Pair: <code>Proceed without a key pair</code></li><li>Network Settings:
+<ol>
+<li>VPC: <code>Default</code></li><li>Subnet: <code>Default</code></li><li>Auto-assign public IP: <code>Enabled</code></li><li>Create Security Group
+<ol>
+<li><code>Allow SSH traffic</code></li><li><code>Allow HTTPs traffic</code></li><li><code>Allow HTTP traffic</code></li></ol></li></ol></li><li>Storage: <code>Default settings</code></li><li>Advanced Details: <code>Default settings</code></li></ol><h3 id=connecting-to-ec2-instance>Connecting to EC2 Instance</h3><p>After the EC2 has been created navigate to the dashboard of the <code>EC2 instance</code>.</p><p>Click on the connect button which will take you to the <code>Connect to Instance</code> page.</p><p><img src="pictures/connect-to-instance.png?classes=border" alt=connect-to-instance></p><p>Verify your settings are similar to the above screenshot within the <code>EC2 Instance Connect</code> tab.</p><p>Click the <code>Connect</code> button.</p><p><img src="pictures/connected-to-instance-view.png?classes=border" alt="connected to ec2 instance"></p><p>Now that you have connected to your instance it is always good practive to update your server.</p><p>Run the following command:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt update -y
+</span></span></code></pre></div><h3 id=project-requirements>Project Requirements</h3><p>In order start our <code>C#/ASP.NET</code> application you will need the following:</p><ol>
+<li>Project Artifacts cloned
+<ul>
+<li><code>https://github.com/LaunchCodeTechnicalTraining/dotnet-mvc-artifacts</code></li></ul></li><li><code>dotnet</code> CLI installed
+<ul>
+<li><code>dotnet-sdk-3.1</code></li></ul></li><li>Web Server Installed (Caddy)
+<ul>
+<li>Web Server configured (Caddy)</li></ul></li></ol><h3 id=clone-project-artifacts>Clone Project Artifacts</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/LaunchCodeTechnicalTraining/dotnet-mvc-artifacts
+</span></span></code></pre></div><p><img src="pictures/clone-dotnet-artifacts.png?classes=border" alt="Clone dotnet Project Build Artifacts"></p><h3 id=install-dotnet-sdk>Install dotnet-sdk</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install dotnet-sdk-6.0
+</span></span></code></pre></div><p>Confirm that you want to Install the Package:</p><p><img src="pictures/apt-install-dotnet-Y.png?classes=border" alt="Install Dotnet SDK Package"></p><div class="box notices note">
+<div class=box-label><i class="fas fa-exclamation-circle fa-fw"></i> Note</div><div class=box-content>
+<p>Check that the Package has been successfully installed running the following command: <code>which dotnet</code></p></div></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>which dotnet
+</span></span></code></pre></div><p><img src="pictures/dotnet-installed-check.png?classes=border" alt="Dotnet Package Installed Validation"></p><p>You can see that the Package has been installed and is located in the <code>/usr/bin/</code> directory.</p><p>You can also check that you have the correct version installed with the following command:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dotnet --version
+</span></span></code></pre></div><p><img src="pictures/dotnet--version.png?classes=border" alt="Check Version of dotnet"></p><p>You can see that the version is <code>6.0.x</code>.</p><h3 id=install-caddy>Install Caddy</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>curl -1sLf <span style=color:#e6db74>&#39;https://dl.cloudsmith.io/public/caddy/stable/gpg.key&#39;</span> | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>curl -1sLf <span style=color:#e6db74>&#39;https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt&#39;</span> | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt update
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install caddy
+</span></span></code></pre></div><div class="box notices note">
+<div class=box-label><i class="fas fa-exclamation-circle fa-fw"></i> Note</div><div class=box-content>
+<p>Verify that caddy was installed using the following commands:</p></div></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>which caddy
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>caddy version
+</span></span></code></pre></div><p><img src="pictures/caddy-install-validation.png?classes=border" alt="Caddy Installation Validation"></p><h3 id=configure-web-server>Configure Web Server</h3><p>Now that you have cloned the project <code>build artifacts</code> in addition to installing the correct <code>SDK</code> and <code>Web Server</code> you need to configure your <code>Caddyfile</code>.</p><div class="box notices note">
+<div class=box-label><i class="fas fa-exclamation-circle fa-fw"></i> Note</div><div class=box-content>
+<p>The <code>ASP.NET</code> project will be running on port <code>5000</code>. That means you will need to configure a reverse proxy within your <code>Caddyfile</code> to handle the <code>HTTP</code> requests to port <code>5000</code> on the running server.</p></div></div><p>Run the following command to open your default <code>Caddyfile</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo vim /etc/caddy/Caddyfile
+</span></span></code></pre></div><p><img src="pictures/default-caddyfile.png?classes=border" alt="Default Caddyfile View"></p><p>Remove all content within the file and overwrite it with the following:</p><div class="box notices green">
+<div class=box-label>Bonus</div><div class=box-content>
+<p>If you need a refresher on how to use <code>vim</code> you can visit the <code>Linux</code> curriculum here: <a href=https://launchcodetechnicaltraining.org/linux/userspace-applications/walkthrough/vim/>Vim Introduction</a></p></div></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>http://your-public-ipv4-address <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    reverse_proxy 127.0.0.1:5000
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>After making changes to your <code>Caddyfile</code> you will need to reload it with the following command:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo caddy reload --config /etc/caddy/Caddyfile
+</span></span></code></pre></div><h3 id=start-aspnet-application>Start ASP.NET Application</h3><p>Now that the web server is configured you are ready to start your application.</p><p>Navigate to your <code>dotnet-mvc-artifacts</code> directory and run the following command:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dotnet run
+</span></span></code></pre></div><p><img src="pictures/dotnet-run.png?classes=border" alt="ASP.NET Run Command"></p><h3 id=validation>Validation</h3><p>Now that the application is up and running you should be able to access it within your browser.</p><p>Open a new browser window and access the application at <code>http://your-public-ipv4-address</code></p><p><img src="pictures/running-dotnet-application.png?classes=border" alt="Running ASP.NET Application"></p><footer class=footline>
+</footer></article></div></main></div><aside id=sidebar class=default-animation>
+<div id=header-wrapper class=default-animation>
+<div id=header class=default-animation>
+<a href=https://launchcodetechnicaltraining.org/aws-basics/><img src=https://launchcodetechnicaltraining.org/aws-basics/images/LaunchCode_white.png alt=LaunchCode></a>
+</div><div class="searchbox default-animation">
+<label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div><script src=https://launchcodetechnicaltraining.org/aws-basics/js/lunr.min.js?1664207541></script>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/auto-complete.js?1664207541></script>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/search.js?1664207541></script>
+</div><div id=homelinks class=default-animation>
+<ul>
+<li>
+<a class=padding href=https://launchcodetechnicaltraining.org/aws-basics/><i class="fas fa-home"></i> Home</a>
+</li></ul></div><div id=content-wrapper class=highlightable>
+<ul class=topics>
+<li data-nav-id=/introduction/ title=Introduction class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/introduction/>Introduction</a></li><li data-nav-id=/aws-account-creation/ title="AWS Account Creation" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/aws-account-creation/>AWS Account Creation</a></li><li data-nav-id=/s3/ title="Simple Storage Service" class=dd-item><input type=checkbox id=section-f273f03b05b3e37ed0d73bba8a489f04 class=toggle><label for=section-f273f03b05b3e37ed0d73bba8a489f04></label><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/>Simple Storage Service</a><ul>
+<li data-nav-id=/s3/walkthrough/ title=Walkthrough class="dd-item alwaysopen"><input type=checkbox id=section-bba3405de1db6439b9e6d5021b7ae96a class=toggle checked><label for=section-bba3405de1db6439b9e6d5021b7ae96a></label><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/walkthrough/>Walkthrough</a><ul>
+<li data-nav-id=/s3/walkthrough/first-s3-bucket/ title="First S3 Bucket" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/walkthrough/first-s3-bucket/>First S3 Bucket</a></li><li data-nav-id=/s3/walkthrough/accessing-s3-bucket/ title="Accessing Your S3 Bucket" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/walkthrough/accessing-s3-bucket/>Accessing Your S3 Bucket</a></li><li data-nav-id=/s3/walkthrough/static-websites/ title="Static Websites" class="dd-item alwaysopen"><input type=checkbox id=section-8624499e2e15e07743534374b3bc5dd1 class=toggle checked><label for=section-8624499e2e15e07743534374b3bc5dd1></label><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/walkthrough/static-websites/>Static Websites</a><ul>
+<li data-nav-id=/s3/walkthrough/static-websites/react-static-website/ title="React Static Website" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/walkthrough/static-websites/react-static-website/>React Static Website</a></li><li data-nav-id=/s3/walkthrough/static-websites/angular-static-website/ title="Angular Static Website" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/s3/walkthrough/static-websites/angular-static-website/>Angular Static Website</a></li></ul></li></ul></li></ul></li><li data-nav-id=/ec2-web-console/ title="Elastic Compute Cloud" class="dd-item parent"><input type=checkbox id=section-0b44ce00bae50dadbf2476bbb8f6d5d3 class=toggle checked><label for=section-0b44ce00bae50dadbf2476bbb8f6d5d3></label><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/>Elastic Compute Cloud</a><ul>
+<li data-nav-id=/ec2-web-console/walkthrough/ title=Walkthrough class="dd-item parent alwaysopen"><input type=checkbox id=section-b6b11d91667a77500c19cad147c09e1a class=toggle checked><label for=section-b6b11d91667a77500c19cad147c09e1a></label><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/>Walkthrough</a><ul>
+<li data-nav-id=/ec2-web-console/walkthrough/first-instance-launch/ title="First EC2 Instance" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/first-instance-launch/>First EC2 Instance</a></li><li data-nav-id=/ec2-web-console/walkthrough/access-ec2/ title="Access your EC2" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/access-ec2/>Access your EC2</a></li><li data-nav-id=/ec2-web-console/walkthrough/static-websites/ title="Static Websites" class="dd-item alwaysopen"><input type=checkbox id=section-96761dfa420c233e9611d5038d5979e5 class=toggle checked><label for=section-96761dfa420c233e9611d5038d5979e5></label><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/static-websites/>Static Websites</a><ul>
+<li data-nav-id=/ec2-web-console/walkthrough/static-websites/react-static-website/ title="React Static Website" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/static-websites/react-static-website/>React Static Website</a></li><li data-nav-id=/ec2-web-console/walkthrough/static-websites/angular-static-website/ title="Angular Static Website" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/static-websites/angular-static-website/>Angular Static Website</a></li></ul></li><li data-nav-id=/ec2-web-console/walkthrough/reverse-proxy-websites/ title="Reverse Proxy" class="dd-item parent alwaysopen"><input type=checkbox id=section-8ff70015ad2e4f967a0d47af3d3a7d04 class=toggle checked><label for=section-8ff70015ad2e4f967a0d47af3d3a7d04></label><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/>Reverse Proxy</a><ul>
+<li data-nav-id=/ec2-web-console/walkthrough/reverse-proxy-websites/java-spring/ title="Java Spring MVC" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/java-spring/>Java Spring MVC</a></li><li data-nav-id=/ec2-web-console/walkthrough/reverse-proxy-websites/dotnet-asp/ title="ASP.NET MVC" class="dd-item active"><a href=https://launchcodetechnicaltraining.org/aws-basics/ec2-web-console/walkthrough/reverse-proxy-websites/dotnet-asp/>ASP.NET MVC</a></li></ul></li></ul></li></ul></li><li data-nav-id=/final-project/ title="Final Project" class=dd-item><input type=checkbox id=section-4c9e7411383c406becfe9e9d1fcdc54c class=toggle><label for=section-4c9e7411383c406becfe9e9d1fcdc54c></label><a href=https://launchcodetechnicaltraining.org/aws-basics/final-project/>Final Project</a><ul>
+<li data-nav-id=/final-project/java-spring-persistent/java-techjobs/ title="Java Spring Persistent" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/final-project/java-spring-persistent/java-techjobs/>Java Spring Persistent</a></li><li data-nav-id=/final-project/java-spring-persistent/java-techjobs-scripted/ title="Scripting with User Data" class=dd-item><a href=https://launchcodetechnicaltraining.org/aws-basics/final-project/java-spring-persistent/java-techjobs-scripted/>Scripting with User Data</a></li></ul></li></ul><div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div><hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+<div id=prefooter class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+<ul>
+<li id=select-language-container class=footerLangSwitch>
+<a class="padding select-container">
+<i class="fas fa-language fa-fw"></i>
+<span>&nbsp;</span>
+<div class=select-style>
+<select id=select-language onchange="location=baseUri+this.value"></select>
+</div><div class=select-clear></div></a>
+</li><li id=select-variant-container class="footerVariantSwitch showVariantSwitch">
+<a class="padding select-container">
+<i class="fas fa-paint-brush fa-fw"></i>
+<span>&nbsp;</span>
+<div class=select-style>
+<select id=select-variant onchange=variants.changeVariant(this.value)><option id=lc-light value=lc-light selected>Lc Light</option><option id=lc-dark-blue value=lc-dark-blue>Lc Dark Blue</option><option id=lc-dark-blue-two value=lc-dark-blue-two>Lc Dark Blue Two</option></select>
+</div><div class=select-clear></div></a>
+<script>variants.markSelectedVariant()</script>
+</li><li class=footerVisitedLinks><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></div><div id=footer class="footerFooter showFooter">
+</div></div></aside><script src=https://launchcodetechnicaltraining.org/aws-basics/js/clipboard.min.js?1664207541></script>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/perfect-scrollbar.min.js?1664207541></script>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/featherlight.min.js?1664207541></script>
+<script src=https://launchcodetechnicaltraining.org/aws-basics/js/theme.js?1664207541></script>
+</body></html>
