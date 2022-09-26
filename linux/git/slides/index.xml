@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Slides on Linux Introduction</title><link>https://launchcodetechnicaltraining.org/linux/git/slides/</link><description>Recent content in Slides on Linux Introduction</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 09 Nov 2021 15:20:12 -0600</lastBuildDate><atom:link href="https://launchcodetechnicaltraining.org/linux/git/slides/index.xml" rel="self" type="application/rss+xml"/><item><title>Slides: Fullscreen</title><link>https://launchcodetechnicaltraining.org/linux/git/slides/fullscreen/</link><pubDate>Tue, 09 Nov 2021 15:20:12 -0600</pubDate><guid>https://launchcodetechnicaltraining.org/linux/git/slides/fullscreen/</guid><description>Git Git Review Version Control Software created by Linux Torvalds
+Similar to the Linux Kernel (also created by Torvalds) it is open source software
+Basic Workflow Adding changes to staging
+Committing changes to local git repo
+Pushing changes from local repo to remote
+Creating a Local Repo git init (within project directory) will initialize a git repository in your current directory
+This allows you to begin controlling &amp;ldquo;versions&amp;rdquo; of your project</description></item></channel></rss>

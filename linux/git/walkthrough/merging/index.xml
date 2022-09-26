@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Merging on Linux Introduction</title><link>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/</link><description>Recent content in Merging on Linux Introduction</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/index.xml" rel="self" type="application/rss+xml"/><item><title>Review Existing Code</title><link>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/code-review/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/code-review/</guid><description>Setup Project repository: py-demo-web-logs-continued
+Fork the project repository to you your personal github account.
+Clone your forked repository onto your personal machine.
+Code Review Note In the example below we are cloning the github repo into the home/student/Desktop directory.
+Run the command git clone https://github.com/[your-github-username]/py-demo-web-logs-continued in your preferred directory.
+View existing branches This repository has three existing branches:
+master new-feature new-function Run the command git-branch-a to view all existing local and remote branches.</description></item><item><title>Git Merge</title><link>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/git-merge/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/git-merge/</guid><description>Traditional Git Merge Note You will be using py-demo-web-logs-continued as the github repository for this walkthrough.
+Using the git merge command is the traditional way to merge development branches into your master branch of development.
+The main benefits of git merge is that you will keep the original history of the master branch in tact. The downside is that you will be working directly on the master branch and any mistakes or unwanted changes will cause problems.</description></item><item><title>Git Rebase</title><link>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/git-rebase/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/git-rebase/</guid><description>Note You will be using py-demo-web-logs-rebase as the github repository for this walkthrough.
+Merging with Git Rebase Rebase is another way to merge branches. The git rebase command will reapply commits from the current branch on top of the target branch.
+To perform a git rebase the command is as follows:
+git rebase [target-branch]
+Note You are rebasing the current branch on top of the [target-branch].</description></item><item><title>PR brief walkthrough</title><link>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/pull-request-hidden/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://launchcodetechnicaltraining.org/linux/git/walkthrough/merging/pull-request-hidden/</guid><description>Create a Pull Request Click the 3 branches section.
+Open a pull request for the new-feature branch.
+Click the New pull request for the new-feature branch.
+Note You will notice that is says &amp;ldquo;There isn&amp;rsquo;t anything to compare.&amp;rdquo;. You need to change the base repository option to your personal github repo.
+Click [your-github-username]/py-demo-web-logs-continued
+Note You will also need to select a different base reference.
+Select master as the base branch reference.</description></item></channel></rss>

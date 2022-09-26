@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Slides on Linux Introduction</title><link>https://launchcodetechnicaltraining.org/linux/userspace-applications/slides/</link><description>Recent content in Slides on Linux Introduction</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://launchcodetechnicaltraining.org/linux/userspace-applications/slides/index.xml" rel="self" type="application/rss+xml"/><item><title>Slides: Fullscreen</title><link>https://launchcodetechnicaltraining.org/linux/userspace-applications/slides/fullscreen/</link><pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate><guid>https://launchcodetechnicaltraining.org/linux/userspace-applications/slides/fullscreen/</guid><description>Userspace Applications wget GNU software package used to retreive files using HTTP, HTTPS, FTP, and FTPS
+Usage with wget you can download a file from the url holding that file
+The download can be any format
+Once downloaded you are able to manipulate the file as you see fit
+curl tool used to craft HTTP and HTTPS requests while also displaying responses
+Open source software
+Usage Allows the user to transfer data from within your terminal or by the use of scripts</description></item></channel></rss>

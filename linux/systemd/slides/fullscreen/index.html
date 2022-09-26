@@ -1,0 +1,37 @@
+<!doctype html><html>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel=stylesheet href=https://unpkg.com/reveal.js@4.0.2/dist/reset.css>
+<link rel=stylesheet href=https://unpkg.com/reveal.js@4.0.2/dist/reveal.css>
+<link rel=stylesheet href=https://unpkg.com/reveal.js@4.0.2/dist/theme/black.css id=theme>
+<link href=https://launchcodetechnicaltraining.org/linux/css/atom-one-dark-reasonable.css rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/linux/css/theme.css rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/linux/css/hugo-theme.css rel=stylesheet>
+<link href=https://launchcodetechnicaltraining.org/linux/css/slides.css rel=stylesheet>
+</head><body>
+<div class=reveal>
+<div class=slides>
+<section data-markdown data-separator=^--- data-separator-vertical=^___ data-separator-notes=^Notes:>
+## systemd
+---
+## Purpose
+Responsible for initializing and managing daemons and services
+___
+### Interacting with systemd
+Users interact with systemd by using the systemctl package and defining unit files
+systemctl provides the end user access to information and control overall services, daemons, and unit files
+---
+## Unit Files
+Unit files are used to complete a default or custom service
+Each systems unit files are stored in the /lib/systemd/system directory
+If you ever wish to modify the way any given unit functions you would edit the unit file inside of /etc/systemd/system
+___
+### Unit Files Continued
+A common use for modifying a unit file would be to start or stop a service at a desired machine state (power on, power off, user login, user logout)
+One major upside to this is that if your server were to ever fail, your Unit file will restart the service on reboot
+</section></div></div><script src=https://unpkg.com/reveal.js@4.0.2/dist/reveal.js></script>
+<script src=https://unpkg.com/reveal.js@4.0.2/plugin/notes/notes.js></script>
+<script src=https://unpkg.com/reveal.js@4.0.2/plugin/markdown/markdown.js></script>
+<script src=https://unpkg.com/reveal.js@4.0.2/plugin/highlight/highlight.js></script>
+<script>Reveal.initialize({plugins:[RevealMarkdown,RevealHighlight,RevealNotes],hash:!0,respondToHashChanges:!0,overview:!0,controlsTutorial:!0,width:"90%",height:"90%",margin:.1})</script>
+</body></html>
